@@ -1,0 +1,5 @@
+This is a user-firendly software written in java to solve the 2d frame problems using finite-element method.
+The user will be able to use this software to analysze 2D frames and to simulate the deformation associated with loads, like axial, uniform, and/or moment load. 
+The software also provide a tool to plot the shear and moment diagrames and to find the maximum loads on each meamber of the input frame. 
+Also, the software has a concrete desing tool that can be used by the user to design each beams and columns in that frame. 
+The desing tool also can be used to calculate the estimated materials cost (steel and concrete)
