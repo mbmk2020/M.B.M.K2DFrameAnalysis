@@ -1,0 +1,19 @@
+This is a user-friendly software written in java to solve the 2d frame problems using the finite-element method.
+The user will be able to use this software to analyze 2D frames and to simulate the deformation associated with loads, like an axial, uniform, and/or moment load. 
+The software also provides a tool to plot the shear and moment diagrams and to find the maximum loads on each member of the input frame. 
+Also, the software has a concrete design tool that can be used by the user to design each beam and column in that frame. 
+The design tool also can be used to calculate the estimated materials cost (steel and concrete)
+########################################
+The input files of this software are two text files as the following: 
+1- Joints.txt--> this file is to describe the x,y coordinates of each joint (units in meters). The following is example of how to input 4 points of a simple 2d fram:
+    example 0,0
+            0,5
+            5,5
+            5,0
+    in this example the points were input in order. 0,0 for point 0, 0,5 for point 1, 5,5 for point 2, and 5,0 for point 5,0
+            
+2- Members.txt--> this file is to describe the members that formulate the desired frame. The following example is related to the joints example mentioned above to connect these joints by the following members:
+    example 0,1   //This is to connect joint 0 with joint 1
+            1,2   //This is to connect joint 1 with joint 2
+            2,3   //This is to connect joint 1 with joint 2
+   
