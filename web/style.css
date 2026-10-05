@@ -1,0 +1,72 @@
+:root{
+  --bg:#f6f7f9; --panel:#fff; --ink:#1b1f27; --muted:#667085; --line:#e3e6eb;
+  --accent:#2563eb; --accent-ink:#fff; --danger:#c2410c; --ok:#15803d;
+  --struct:#1f2937; --faint:#9aa3b2; --load:#d9480f; --pos:#2563eb; --neg:#dc2626; --grid:#eceff3;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1218; --panel:#171b23; --ink:#e6e9ef; --muted:#98a2b3; --line:#2a303b;
+    --accent:#5b8def; --accent-ink:#0b1020; --danger:#fb923c; --ok:#4ade80;
+    --struct:#e5e7eb; --faint:#5b6475; --load:#fb923c; --pos:#6ea0ff; --neg:#f87171; --grid:#1f2430;
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:17px;letter-spacing:.2px}
+h1 span{font-weight:400;color:var(--muted)}
+h2{font-size:15px;margin:0 0 8px}
+h3{font-size:13px;margin:14px 0 6px}
+h3 small{font-weight:400;color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,.btn,select,input{font:inherit;color:inherit}
+button,.btn{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:5px 11px;cursor:pointer}
+button:hover,.btn:hover{border-color:var(--accent)}
+button:focus-visible,.btn:focus-within,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+select,input[type=number],input[type=text]{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:3px 6px}
+label{color:var(--muted)}
+main{display:grid;grid-template-columns:minmax(330px,430px) 1fr;gap:14px;padding:14px 16px;align-items:start}
+#inputs,#stage,#results{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+#results{grid-column:1/-1}
+.tabs{display:flex;gap:4px;margin-bottom:10px}
+.tabs button{flex:1;border-radius:7px}
+.tabs .on,.seg .on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.hint{color:var(--muted);font-size:12.5px;margin:6px 0}
+.add{margin-top:8px;width:100%;border-style:dashed;color:var(--accent)}
+table{border-collapse:collapse;width:100%}
+th{font-weight:600;font-size:11.5px;color:var(--muted);text-align:right;padding:3px 4px;white-space:nowrap}
+td{padding:2px;text-align:right}
+th:first-child,td:first-child{text-align:left;color:var(--muted)}
+td input[type=number],td select{width:100%;min-width:52px;text-align:right}
+td select{min-width:84px}
+td input[type=checkbox]{width:16px;height:16px}
+td.x button{border:0;background:none;color:var(--muted);padding:2px 6px}
+td.x button:hover{color:var(--danger)}
+.res td,.res th{padding:3px 8px;font-variant-numeric:tabular-nums}
+.res tr:nth-child(even) td{background:color-mix(in srgb,var(--line) 35%,transparent)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:8px}
+.seg{display:inline-flex}
+.seg button{border-radius:0;margin-left:-1px}
+.seg button:first-child{border-radius:7px 0 0 7px;margin:0}
+.seg button:last-child{border-radius:0 7px 7px 0}
+.snap{display:flex;align-items:center;gap:5px;font-size:13px}
+.snap input[type=number]{width:60px}
+#msg{min-height:0}
+#msg .err,#msg .warn{border-radius:7px;padding:7px 10px;margin-bottom:8px;font-size:13px}
+#msg .err{background:color-mix(in srgb,var(--danger) 14%,transparent);color:var(--danger);border:1px solid var(--danger)}
+#msg .warn{background:color-mix(in srgb,#eab308 16%,transparent);border:1px solid #ca8a04}
+#canvas{width:100%;height:auto;aspect-ratio:900/540;display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;touch-action:manipulation}
+#canvas.draw{cursor:crosshair}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 20px}
+.grid .wide{grid-column:1/-1}
+.scroll{overflow-x:auto}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 4px;font-size:12px}
+footer{padding:4px 16px 18px;color:var(--muted);font-size:12px}
+svg text{font:11px system-ui,sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round}
+@media (max-width:860px){main{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+@media print{
+  header,#inputs,.toolbar,#draw-hint,footer{display:none!important}
+  main{display:block;padding:0}#stage,#results{border:0;padding:0;margin-bottom:12px}
+  body{background:#fff;color:#000}
+}

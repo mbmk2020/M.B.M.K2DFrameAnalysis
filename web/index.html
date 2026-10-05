@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M.B.M.K 2D Frame Analysis</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 26V8h20v18' fill='none' stroke='%232563eb' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>M.B.M.K <span>2D Frame Analysis</span></h1>
+  <div class="bar">
+    <label>Example
+      <select id="example">
+        <option value="">Choose…</option>
+        <option value="portal">Portal frame</option>
+        <option value="continuous">Continuous beam</option>
+        <option value="truss">Truss</option>
+        <option value="twostory">Two-storey frame</option>
+      </select>
+    </label>
+    <button id="btn-new">New</button>
+    <button id="btn-export">Save</button>
+    <label class="btn">Open<input id="file-open" type="file" accept=".json" hidden></label>
+    <label class="btn" title="Import joints.txt and members.txt from the desktop version">Import .txt<input id="file-txt" type="file" accept=".txt" multiple hidden></label>
+    <button id="btn-print">Print</button>
+  </div>
+</header>
+
+<main>
+  <aside id="inputs">
+    <nav class="tabs" role="tablist">
+      <button class="on" data-tab="nodes">Joints</button>
+      <button data-tab="members">Members</button>
+      <button data-tab="loads">Loads</button>
+    </nav>
+
+    <section data-panel="nodes">
+      <p class="hint">Units: m, kN, GPa, mm⁴, mm². Or switch to <b>Draw</b> and click the canvas.</p>
+      <div id="t-nodes"></div>
+      <button class="add" id="add-node">+ Joint</button>
+    </section>
+
+    <section data-panel="members" hidden>
+      <p class="hint">Tick <b>Hinge</b> to release the end moment (pin) at that end.</p>
+      <div id="t-members"></div>
+      <button class="add" id="add-member">+ Member</button>
+    </section>
+
+    <section data-panel="loads" hidden>
+      <h3>Joint loads <small>Fx →, Fy ↑, M ↺</small></h3>
+      <div id="t-nodeloads"></div>
+      <button class="add" id="add-nodeload">+ Joint load</button>
+      <h3>Member loads <small>gravity: + is downward</small></h3>
+      <div id="t-memberloads"></div>
+      <button class="add" id="add-memberload">+ Member load</button>
+      <p class="hint">Position <i>a</i> is measured from the member's first joint. Leave <i>length</i> empty for “to the end”. Perpendicular + points to the left of the first→second joint direction. Distributed loads are per metre of member length.</p>
+    </section>
+  </aside>
+
+  <section id="stage">
+    <div class="toolbar">
+      <div class="seg" id="views">
+        <button class="on" data-view="model">Model</button>
+        <button data-view="deformed">Deformed</button>
+        <button data-view="axial">Axial</button>
+        <button data-view="shear">Shear</button>
+        <button data-view="moment">Moment</button>
+      </div>
+      <div class="seg" id="modes">
+        <button class="on" data-mode="select">Select</button>
+        <button data-mode="draw">Draw</button>
+      </div>
+      <label class="snap">Snap <input id="snap" type="number" value="0.5" min="0" step="0.25"> m</label>
+      <label class="snap" id="scale-wrap" hidden>Scale <input id="scale" type="range" min="0.1" max="3" step="0.05" value="1"></label>
+    </div>
+    <div id="msg" role="status"></div>
+    <svg id="canvas" viewBox="0 0 900 540" preserveAspectRatio="xMidYMid meet" aria-label="Frame drawing"></svg>
+    <p class="hint" id="draw-hint" hidden>Draw mode: click to place a joint, click another to connect it with a member. Press <kbd>Esc</kbd> or right-click to stop chaining.</p>
+  </section>
+
+  <section id="results">
+    <h2>Results</h2>
+    <div class="grid">
+      <div><h3>Support reactions <small>kN, kN·m</small></h3><div id="r-reactions"></div></div>
+      <div><h3>Joint displacements <small>mm, mrad</small></h3><div id="r-disp"></div></div>
+      <div class="wide"><h3>Member forces <small>maximum values and end forces</small></h3><div id="r-members"></div></div>
+    </div>
+  </section>
+</main>
+<footer>Direct stiffness method · Euler–Bernoulli beam-column elements · all calculation runs in your browser.
+  Based on the original desktop app by Mohammad Bilal Al-khasawneh.</footer>
+
+<script src="solver.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

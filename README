@@ -17,3 +17,6 @@ The input files of this software are two text files as the following:
             1,2   //This is to connect joint 1 with joint 2
             2,3   //This is to connect joint 1 with joint 2
    
+
+########################################
+NEW: a web version (no install, runs in any browser) lives in the `web/` folder - open web/index.html. See web/README.md.
